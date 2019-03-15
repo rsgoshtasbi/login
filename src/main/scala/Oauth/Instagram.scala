@@ -31,9 +31,9 @@ class Instagram {
   implicit val formats = DefaultFormats
 
   def requestAccessToken(code: String): Route = {
-    val requestURI = "https://api.instagram.com/oauth/access_token"
-    var oAuthToken = Await.result(postAuthCode(requestURI, code), 10.seconds)
     try {
+      val requestURI = "https://api.instagram.com/oauth/access_token"
+      var oAuthToken = Await.result(postAuthCode(requestURI, code), 10.seconds)
       val tokenJson = parse(oAuthToken).extract[Token]
       complete(oAuthToken)
     } catch {
@@ -57,7 +57,8 @@ class Instagram {
       Pair.create("client_id", "29e3af1cf2724d578535375565dc72af"),
       Pair.create("client_secret", "c3d1a298390648929551064693464899"),
       Pair.create("grant_type", "authorization_code"),
-      Pair.create("redirect_uri", "http://users-api.us-east-1.elasticbeanstalk.com/"),
+      Pair.create("redirect_uri", "http://users-api.us-east-1.elasticbeanstalk.com/instagram?"),
+//      Pair.create("redirect_uri", "http://localhost:5000/instagram?"),
       Pair.create("code", code))
     val request = HttpRequest(HttpMethods.POST, uri).withEntity(formData.toEntity())
 

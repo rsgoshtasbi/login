@@ -26,6 +26,17 @@ class Get() extends Directives {
         extractUnmatchedPath { remaining =>
           complete("in /users/...somepath...")
         }
+      } ~
+      pathPrefix("instagram") {
+        pathEndOrSingleSlash {
+          parameters('code) { code =>
+            new Instagram().requestAccessToken(code)
+          } ~
+          complete(StatusCodes.BadRequest, "Invalid Authorization")
+        } ~
+        extractUnmatchedPath { remaining =>
+          complete("in /instagram/...somepath...")
+        }
       }
     }
 }
