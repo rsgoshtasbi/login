@@ -44,18 +44,9 @@ class Instagram {
   }
 
   def postAuthCode(uri: String, code: String): Future[String] = {
-    /*
-    https://api.instagram.com/oauth/authorize/?client_id=29e3af1cf2724d578535375565dc72af&redirect_uri=http://users-api.us-east-1.elasticbeanstalk.com/&response_type=code
-    curl -F 'client_id=CLIENT_ID' \
-      -F 'client_secret=CLIENT_SECRET' \
-      -F 'grant_type=authorization_code' \
-      -F 'redirect_uri=AUTHORIZATION_REDIRECT_URI' \
-      -F 'code=CODE' \
-      https://api.instagram.com/oauth/access_token
-     */
     val formData = FormData.create(
-      Pair.create("client_id", "29e3af1cf2724d578535375565dc72af"),
-      Pair.create("client_secret", "c3d1a298390648929551064693464899"),
+      Pair.create("client_id", ""),
+      Pair.create("client_secret", ""),
       Pair.create("grant_type", "authorization_code"),
       Pair.create("redirect_uri", "http://users-api.us-east-1.elasticbeanstalk.com/instagram?"),
 //      Pair.create("redirect_uri", "http://localhost:5000/instagram?"),
